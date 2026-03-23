@@ -18,63 +18,11 @@ const fadeInUp = {
   },
 };
 
-function SmokeBackground() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const mouseXSpring = useSpring(mouseX, springConfig);
-  const mouseYSpring = useSpring(mouseY, springConfig);
-
-  const puffs = [
-    { id: 1, size: 800, baseOffset: { x: "-10%", y: "5%" }, mouseFactor: 0.05, duration: 20, delay: 0 },
-    { id: 2, size: 1000, baseOffset: { x: "50%", y: "35%" }, mouseFactor: -0.03, duration: 28, delay: 2 },
-    { id: 3, size: 700, baseOffset: { x: "5%", y: "65%" }, mouseFactor: 0.04, duration: 22, delay: 4 },
-    { id: 4, size: 900, baseOffset: { x: "75%", y: "15%" }, mouseFactor: -0.06, duration: 30, delay: 6 },
-    { id: 5, size: 850, baseOffset: { x: "20%", y: "40%" }, mouseFactor: 0.02, duration: 25, delay: 3 },
-  ];
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    mouseX.set((clientX / innerWidth) - 0.5);
-    mouseY.set((clientY / innerHeight) - 0.5);
-  };
-
+function AmbientLight() {
   return (
-    <div 
-      className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-      onMouseMove={handleMouseMove}
-    >
-      {puffs.map((p) => {
-        const xInteraction = useTransform(mouseXSpring, [ -0.5, 0.5 ], [ `${p.mouseFactor * 100}%`, `${-p.mouseFactor * 100}%` ]);
-        const yInteraction = useTransform(mouseYSpring, [ -0.5, 0.5 ], [ `${p.mouseFactor * 80}%`, `${-p.mouseFactor * 80}%` ]);
-
-        return (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full bg-primary blur-[120px]"
-            style={{
-              width: p.size,
-              height: p.size,
-              left: p.baseOffset.x,
-              top: p.baseOffset.y,
-              x: xInteraction,
-              y: yInteraction,
-            }}
-            animate={{
-              opacity: [0.03, 0.25, 0.1, 0.2, 0.03],
-              scale: [1, 1.15, 0.95, 1.1, 1],
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              delay: p.delay,
-              ease: "easeInOut",
-            }}
-          />
-        );
-      })}
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
     </div>
   );
@@ -149,7 +97,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
       id="about"
       className="relative bg-background pt-32 md:pt-48 pb-16 md:pb-24 overflow-hidden"
     >
-      <SmokeBackground />
+      <AmbientLight />
       <TopographicLines />
       <Coordinates />
       
@@ -228,7 +176,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
               {profile.bio?.split("\n\n").map((paragraph, i) => (
                 <p
                   key={i}
-                  className="font-body text-base md:text-lg leading-[1.8] text-on-surface-variant max-w-xl"
+                  className="font-body text-lg md:text-xl lg:text-2xl leading-[1.6] text-on-surface-variant font-light"
                 >
                   {paragraph}
                 </p>
