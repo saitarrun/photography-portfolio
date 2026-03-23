@@ -133,7 +133,6 @@ export interface Database {
           email: string | null;
           social_links: Json;
           achievements: Json;
-          experience: Json;
           created_at: string;
           updated_at: string;
         };
@@ -145,7 +144,6 @@ export interface Database {
           email?: string | null;
           social_links?: Json;
           achievements?: Json;
-          experience?: Json;
           created_at?: string;
           updated_at?: string;
         };
