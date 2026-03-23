@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Explore photography collections from across the American West.",
 };
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export default async function LocationsPage() {
   const locations = await getLocationsData();

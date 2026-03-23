@@ -9,7 +9,7 @@ import {
   getAllLocationSlugs,
 } from "@/lib/data";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 interface PageProps {
   params: Promise<{ slug: string }>;

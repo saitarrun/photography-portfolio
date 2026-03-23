@@ -4,7 +4,7 @@ import { WorkSection } from "@/components/sections/WorkSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { getLocationsData, getProfileData } from "@/lib/data";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export default async function HomePage() {
   const [locations, profile] = await Promise.all([
