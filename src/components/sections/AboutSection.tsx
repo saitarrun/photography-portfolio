@@ -123,6 +123,7 @@ function Coordinates() {
 }
 
 import { TopographicLines } from "@/components/ui/TopographicLines";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 export function AboutSection({ profile }: AboutSectionProps) {
   const ref = useRef<HTMLElement>(null);
@@ -149,14 +150,10 @@ export function AboutSection({ profile }: AboutSectionProps) {
       id="about"
       className="relative bg-background pt-32 md:pt-48 pb-16 md:pb-24 overflow-hidden"
     >
-      <SmokeBackground />
+      <GridBackground />
       <TopographicLines />
       <Coordinates />
       
-      {/* Parallax Blobs */}
-      <FloatingFragment className="top-[10%] left-[5%]" delay={0} speed={0.8} />
-      <FloatingFragment className="bottom-[10%] right-[10%]" delay={2} speed={1.2} />
-      <FloatingFragment className="top-[40%] right-[20%]" delay={5} speed={0.5} />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12 lg:px-20">
         {/* Section label */}
